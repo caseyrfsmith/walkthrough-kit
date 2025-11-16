@@ -144,7 +144,7 @@ function CodeBlockRenderer({ code }: { code: CodeBlock }) {
           onClick={handleCopy}
           aria-label="Copy code"
         >
-          {copied ? '✓ Copied!' : 'Copy'}
+          {copied ? '✓' : 'Copy'}
         </button>
       </div>
 

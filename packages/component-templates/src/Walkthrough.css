@@ -54,7 +54,14 @@
 /* Content area */
 .walkthrough__content {
   margin-bottom: 2rem;
+  animation: fadeIn 0.3s ease-in;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Header */
 .walkthrough__header {
@@ -100,6 +107,9 @@
   padding: 0.5rem 1rem;
   background: rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .walkthrough__code-language {
@@ -239,6 +249,7 @@
 
 .walkthrough__dot:hover {
   border-color: var(--walkthrough-primary);
+  transform: scale(1.3);
 }
 
 .walkthrough__dot--active {
