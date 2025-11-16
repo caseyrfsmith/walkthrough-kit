@@ -12,7 +12,7 @@
   --walkthrough-border: #e0e0e0;
   --walkthrough-code-bg: #1e1e1e;
   --walkthrough-code-text: #d4d4d4;
-  --walkthrough-highlight-bg: rgba(255, 255, 0, 0.1);
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15);
   
   /* Spacing */
   --walkthrough-padding: 1.5rem;
@@ -148,9 +148,10 @@
 
 .walkthrough__code-line--highlighted {
   background: var(--walkthrough-highlight-bg);
-  border-left: 3px solid var(--walkthrough-primary);
+  border-left: 4px solid var(--walkthrough-primary);
   margin-left: -1rem;
-  padding-left: calc(1rem - 3px);
+  padding-left: calc(1rem - 4px);
+  box-shadow: inset 0 0 0 1px rgba(66, 150, 255, 0.2);
 }
 
 .walkthrough__line-number {

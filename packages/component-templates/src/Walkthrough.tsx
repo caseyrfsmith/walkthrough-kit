@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { WalkthroughProps, Step, CodeBlock } from './types.js';
 import { useStepNavigation } from './hooks/useStepNavigation.js';
 import { tokenize, getTokenColor } from './lexer/index.js';
@@ -23,6 +23,20 @@ export function Walkthrough({
     canGoNext,
     canGoPrevious,
   } = useStepNavigation(steps.length, initialStep, onStepChange);
+
+  // Keyboard navigation
+    useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft' && canGoPrevious) {
+        previousStep();
+        } else if (e.key === 'ArrowRight' && canGoNext) {
+        nextStep();
+        }
+    };
+
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, [canGoNext, canGoPrevious, nextStep, previousStep]);
 
   const step = steps[currentStep];
 
