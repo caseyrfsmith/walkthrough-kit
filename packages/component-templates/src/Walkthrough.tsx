@@ -100,13 +100,13 @@ export function Walkthrough({
 /**
  * Code Block Renderer with Syntax Highlighting
  */
+/**
+ */
+
 function CodeBlockRenderer({ code }: { code: CodeBlock }) {
   const [copied, setCopied] = useState(false);
   
-  // Tokenize the code for syntax highlighting
-  const tokens = tokenize(code.content, code.language);
-  
-  // Split into lines for line numbering and highlighting
+  // Split code into lines
   const lines = code.content.split('\n');
   
   // Copy to clipboard handler
@@ -141,6 +141,9 @@ function CodeBlockRenderer({ code }: { code: CodeBlock }) {
             const lineNumber = lineIndex + 1;
             const isHighlighted = code.highlightLines.includes(lineNumber);
             
+            // Tokenize this line
+            const tokens = tokenize(line, code.language);
+            
             return (
               <div
                 key={lineIndex}
@@ -150,7 +153,14 @@ function CodeBlockRenderer({ code }: { code: CodeBlock }) {
               >
                 <span className="walkthrough__line-number">{lineNumber}</span>
                 <span className="walkthrough__line-content">
-                  {renderLineTokens(tokens, line)}
+                  {tokens.map((token, tokenIndex) => (
+                    <span
+                      key={tokenIndex}
+                      style={{ color: getTokenColor(token.type) }}
+                    >
+                      {token.value}
+                    </span>
+                  ))}
                 </span>
               </div>
             );
@@ -159,31 +169,4 @@ function CodeBlockRenderer({ code }: { code: CodeBlock }) {
       </pre>
     </div>
   );
-}
-
-/**
- * Render tokens for a specific line
- */
-function renderLineTokens(tokens: Array<{ type: string; value: string }>, line: string) {
-  // Find tokens that belong to this line
-  let currentPos = 0;
-  const lineTokens: React.ReactNode[] = [];
-  
-  for (let i = 0; i < tokens.length; i++) {
-    const token = tokens[i];
-    const tokenLines = token.value.split('\n');
-    
-    // If this token contains the current line
-    if (token.value.includes(line)) {
-      // Simple approach: color the whole line based on token type
-      return (
-        <span style={{ color: getTokenColor(token.type) }}>
-          {line}
-        </span>
-      );
-    }
-  }
-  
-  // Fallback: render as plain text
-  return <span>{line}</span>;
 }
