@@ -2,7 +2,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkFrontmatter from 'remark-frontmatter';
 import { parse as parseYaml } from 'yaml';
-import type { WalkthroughData, WalkthroughMetadata, Step, CodeBlock } from './types.js';
+import type { WalkthroughData, WalkthroughMetadata, Step, CodeBlock, UnifiedCodeBlock } from './types.js';
 
 /**
  * Parse markdown into walkthrough data structure
@@ -13,18 +13,26 @@ export async function parseMarkdown(markdown: string): Promise<WalkthroughData> 
     .use(remarkFrontmatter, ['yaml']);
 
   const tree = processor.parse(markdown);
-  
+
   // Extract metadata from frontmatter
   const metadata = extractMetadata(tree);
+
+  // Check if unified mode
+  const isUnified = metadata.mode === 'unified';
+
+  // If unified, extract the first code block
+  const unifiedCode = isUnified ? extractUnifiedCode(tree) : undefined;
+
+  // Extract steps (behavior changes based on mode)
+  const steps = extractSteps(tree, isUnified, unifiedCode);
+
+return {
+  version: '1.0',
+  metadata,
+  steps,
+  unifiedCode 
+};
   
-  // Extract steps from content
-  const steps = extractSteps(tree);
-  
-  return {
-    version: '1.0',
-    metadata,
-    steps
-  };
 }
 
 /**
@@ -43,29 +51,56 @@ function extractMetadata(tree: any): WalkthroughMetadata {
     title: yaml.title || 'Untitled Walkthrough',
     estimatedTime: yaml.estimatedTime,
     difficulty: yaml.difficulty,
-    description: yaml.description
+    description: yaml.description,
+    mode: yaml.mode || 'separate' // default to 'separate' if not specified
   };
+}
+
+/**
+ * Extract the unified code block (first code block in the document)
+ */
+function extractUnifiedCode(tree: any): UnifiedCodeBlock | undefined {
+  // Find the first code block in the document
+  for (const node of tree.children) {
+    if (node.type === 'code') {
+      const rawLang = node.lang || 'text';
+      const [lang] = rawLang.split(':');
+      
+      return {
+        language: lang,
+        content: node.value
+      };
+    }
+  }
+  return undefined;
 }
 
 /**
  * Extract steps from markdown content
  * Looks for ## Step N: patterns
  */
-function extractSteps(tree: any): Step[] {
+function extractSteps(tree: any, isUnified: boolean = false, unifiedCode?: UnifiedCodeBlock): Step[] {
   const steps: Step[] = [];
   const children = tree.children;
   
   let currentStep: Partial<Step> | null = null;
   let stepNumber = 0;
+  let seenUnifiedCode = false;
   
   for (let i = 0; i < children.length; i++) {
     const node = children[i];
+
+    // Skip first code block in unified mode (it's the shared code)
+    if (isUnified && node.type === 'code' && !seenUnifiedCode) {
+      seenUnifiedCode = true;
+      continue;
+    }
     
     // Check for step heading (any ## heading becomes a step)
     if (node.type === 'heading' && node.depth === 2) {
       // Save previous step if exists
       if (currentStep && currentStep.title) {
-        steps.push(finalizeStep(currentStep, stepNumber));
+        steps.push(finalizeStep(currentStep, stepNumber, isUnified, unifiedCode));
       }
       
       // Start new step
@@ -84,7 +119,8 @@ function extractSteps(tree: any): Step[] {
         number: stepNumber,
         title,
         description: '',
-        notes: ''
+        notes: '',
+        highlightLines: []
       };
       continue;
     }
@@ -94,14 +130,36 @@ function extractSteps(tree: any): Step[] {
     
     // Extract description (first paragraph after heading)
     if (node.type === 'paragraph' && !currentStep.description) {
-      currentStep.description = extractText(node);
+      const text = extractText(node);
+      
+      // Check if this is a highlight line in unified mode
+      if (isUnified) {
+        const highlightMatch = text.match(/^highlight:\s*(.+)$/i);
+        if (highlightMatch) {
+          currentStep.highlightLines = parseHighlightLines(highlightMatch[1]);
+          continue;
+        }
+      }
+      
+      // Otherwise, it's the description
+      currentStep.description = text;
       continue;
     }
     
-    // Extract code block
-    if (node.type === 'code' && !currentStep.code) {
+    // Extract code block (only in separate mode)
+    if (node.type === 'code' && !currentStep.code && !isUnified) {
       currentStep.code = extractCodeBlock(node);
       continue;
+    }
+
+    // In unified mode, look for "highlight: X" lines in paragraphs
+    if (isUnified && node.type === 'paragraph' && !currentStep.highlightLines) {
+      const text = extractText(node);
+      const highlightMatch = text.match(/^highlight:\s*(.+)$/i);
+      if (highlightMatch) {
+        currentStep.highlightLines = parseHighlightLines(highlightMatch[1]);
+        continue;
+      }
     }
     
     // Additional notes (paragraphs after code)
@@ -110,11 +168,12 @@ function extractSteps(tree: any): Step[] {
     }
   }
   
-  // Add last step
+  // last step
   if (currentStep && currentStep.title) {
-    steps.push(finalizeStep(currentStep, stepNumber));
+    steps.push(finalizeStep(currentStep, stepNumber, isUnified, unifiedCode));
   }
   
+
   return steps;
 }
 
@@ -189,13 +248,24 @@ function parseHighlightLines(meta: string): number[] {
 /**
  * Finalize a step object
  */
-function finalizeStep(step: Partial<Step>, stepNumber: number): Step {
+function finalizeStep(step: Partial<Step>, stepNumber: number, isUnified: boolean, unifiedCode?: UnifiedCodeBlock): Step {
+  // In unified mode, create code block from unified code + highlight lines
+  let code = step.code;
+  if (isUnified && unifiedCode && step.highlightLines) {
+    code = {
+      language: unifiedCode.language,
+      content: unifiedCode.content,
+      highlightLines: step.highlightLines
+    };
+  }
+  
   return {
     id: step.id || `step-${stepNumber}`,
     number: stepNumber,
     title: step.title || 'Untitled Step',
     description: step.description || '',
-    code: step.code,  // May be undefined if there's no code block
-    notes: step.notes?.trim() || undefined
+    code,
+    notes: step.notes?.trim() || undefined,
+    highlightLines: step.highlightLines
   };
 }

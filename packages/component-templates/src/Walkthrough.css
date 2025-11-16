@@ -33,6 +33,8 @@
   font-family: var(--walkthrough-font-family);
   color: var(--walkthrough-text);
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Dark theme overrides */
@@ -40,6 +42,7 @@
   --walkthrough-bg: #1a1a1a;
   --walkthrough-text: #e0e0e0;
   --walkthrough-border: #333333;
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15); 
 }
 
 /* Light theme */
@@ -123,6 +126,7 @@
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
   color: var(--walkthrough-text);
+  min-height: 10em;  /* Ensures consistent height to reduce layout shifts */
 }
 
 /* Code block */

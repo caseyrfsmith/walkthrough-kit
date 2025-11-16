@@ -5,12 +5,13 @@ import pythonClass from './python-class.json';
 import gitWorkflow from './git-workflow.json';
 import apiGuide from './api-guide.json';
 import './Walkthrough.css';
+import type { WalkthroughData } from '../../packages/parser/src/types';
 
-const examples = [
-  { name: 'JavaScript Quick Start', data: basicGuide },
-  { name: 'Python Class Tutorial', data: pythonClass },
-  { name: 'Git Workflow', data: gitWorkflow },
-  { name: 'REST API Guide', data: apiGuide },
+const examples: Array<{ name: string; data: WalkthroughData }> = [
+  { name: 'JavaScript Quick Start', data: basicGuide as WalkthroughData },
+  { name: 'Python Class Tutorial', data: pythonClass as WalkthroughData },
+  { name: 'Git Workflow', data: gitWorkflow as WalkthroughData },
+  { name: 'REST API Guide', data: apiGuide as WalkthroughData },
 ];
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
           </select>
         </div>
       </div>
-      <Walkthrough key={selectedExample} steps={examples[selectedExample].data.steps} theme={theme} />
+      <Walkthrough key={selectedExample} steps={examples[selectedExample].data.steps} theme={theme} unifiedCode={examples[selectedExample].data.unifiedCode} minHeight='800px' descriptionHeight='2rem' />
     </div>
   );
 }

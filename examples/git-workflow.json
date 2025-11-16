@@ -3,7 +3,8 @@
   "metadata": {
     "title": "Git Workflow Guide",
     "estimatedTime": "5 minutes",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "mode": "separate"
   },
   "steps": [
     {
@@ -16,7 +17,8 @@
         "content": "git checkout -b feature/new-feature",
         "highlightLines": []
       },
-      "notes": "This creates and switches to a new branch in one command."
+      "notes": "This creates and switches to a new branch in one command.",
+      "highlightLines": []
     },
     {
       "id": "step-2",
@@ -28,7 +30,8 @@
         "content": "git add .",
         "highlightLines": []
       },
-      "notes": "The dot means \"add all changed files in the current directory.\""
+      "notes": "The dot means \"add all changed files in the current directory.\"",
+      "highlightLines": []
     },
     {
       "id": "step-3",
@@ -40,7 +43,8 @@
         "content": "git commit -m \"feat: add new feature\"",
         "highlightLines": []
       },
-      "notes": "Use conventional commit prefixes like feat:, fix:, or docs: for clarity."
+      "notes": "Use conventional commit prefixes like feat:, fix:, or docs: for clarity.",
+      "highlightLines": []
     },
     {
       "id": "step-4",
@@ -51,7 +55,8 @@
         "language": "bash",
         "content": "git push origin feature/new-feature",
         "highlightLines": []
-      }
+      },
+      "highlightLines": []
     },
     {
       "id": "step-5",
@@ -63,7 +68,8 @@
         "content": "gh pr create --title \"Add new feature\" --body \"Description here\"",
         "highlightLines": []
       },
-      "notes": "This requires the GitHub CLI (gh) to be installed."
+      "notes": "This requires the GitHub CLI (gh) to be installed.",
+      "highlightLines": []
     }
   ]
 }

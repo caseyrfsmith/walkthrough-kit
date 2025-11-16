@@ -6,13 +6,20 @@ export interface WalkthroughData {
   version: string;
   metadata: WalkthroughMetadata;
   steps: Step[];
+  unifiedCode?: UnifiedCodeBlock;
 }
 
 export interface WalkthroughMetadata {
   title: string;
   estimatedTime?: string;
   difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  mode?: 'separate' | 'unified';
   description?: string;
+}
+
+export interface UnifiedCodeBlock {
+  language: string;
+  content: string;
 }
 
 export interface Step {
@@ -22,6 +29,7 @@ export interface Step {
   description: string;
   code?: CodeBlock;
   notes?: string;
+  highlightLines?: number[];
 }
 
 export interface CodeBlock {

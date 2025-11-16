@@ -14,6 +14,9 @@ export function Walkthrough({
   theme = 'auto',
   onStepChange,
   className = '',
+  unifiedCode,
+  minHeight,
+  descriptionHeight
 }: WalkthroughProps) {
   const {
     currentStep,
@@ -40,12 +43,22 @@ export function Walkthrough({
 
   const step = steps[currentStep];
 
+
   if (!step) {
     return <div className="walkthrough-error">No steps available</div>;
   }
 
+  // Determine which code to display
+    const codeToDisplay = unifiedCode 
+    ? { 
+        language: unifiedCode.language, 
+        content: unifiedCode.content, 
+        highlightLines: step.highlightLines || [] 
+      }
+    : step.code;
+
   return (
-    <div className={`walkthrough walkthrough--${theme} ${className}`}>
+    <div className={`walkthrough walkthrough--${theme} ${className}`} style={{ minHeight }}>
       {/* Step Content */}
       <div className="walkthrough__content">
         {/* Step Header */}
@@ -57,10 +70,15 @@ export function Walkthrough({
         </div>
 
         {/* Description */}
-        <p className="walkthrough__description">{step.description}</p>
+        <p 
+          className="walkthrough__description"
+          style={{ minHeight: descriptionHeight }}
+        >
+          {step.description}
+        </p>
 
         {/* Code Block (if present) */}
-        {step.code && <CodeBlockRenderer code={step.code} />}
+        {codeToDisplay && <CodeBlockRenderer code={codeToDisplay} />}
 
         {/* Notes (if present) */}
         {step.notes && (

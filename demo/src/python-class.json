@@ -3,32 +3,89 @@
   "metadata": {
     "title": "Python Class Tutorial",
     "estimatedTime": "8 minutes",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "mode": "unified"
   },
   "steps": [
     {
       "id": "step-1",
       "number": 1,
       "title": "Define the class",
-      "description": "highlight: 1"
+      "description": "We start by defining a User class. Classes in Python use the class keyword followed by the class name.",
+      "code": {
+        "language": "python",
+        "content": "class User:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n        self.is_active = True\n    \n    def deactivate(self):\n        self.is_active = False\n    \n    def send_email(self, message):\n        if self.is_active:\n            print(f\"Sending to {self.email}: {message}\")\n        else:\n            print(\"User is inactive\")",
+        "highlightLines": [
+          1
+        ]
+      },
+      "highlightLines": [
+        1
+      ]
     },
     {
       "id": "step-2",
       "number": 2,
       "title": "Initialize with constructor",
-      "description": "highlight: 2-5"
+      "description": "The __init__ method is Python's constructor. It runs when you create a new User instance. We set up three attributes: name, email, and a default active status.",
+      "code": {
+        "language": "python",
+        "content": "class User:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n        self.is_active = True\n    \n    def deactivate(self):\n        self.is_active = False\n    \n    def send_email(self, message):\n        if self.is_active:\n            print(f\"Sending to {self.email}: {message}\")\n        else:\n            print(\"User is inactive\")",
+        "highlightLines": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "highlightLines": [
+        2,
+        3,
+        4,
+        5
+      ]
     },
     {
       "id": "step-3",
       "number": 3,
       "title": "Add a deactivate method",
-      "description": "highlight: 7-8"
+      "description": "This method changes the user's active status to False. Simple methods like this modify the object's state.",
+      "code": {
+        "language": "python",
+        "content": "class User:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n        self.is_active = True\n    \n    def deactivate(self):\n        self.is_active = False\n    \n    def send_email(self, message):\n        if self.is_active:\n            print(f\"Sending to {self.email}: {message}\")\n        else:\n            print(\"User is inactive\")",
+        "highlightLines": [
+          7,
+          8
+        ]
+      },
+      "highlightLines": [
+        7,
+        8
+      ]
     },
     {
       "id": "step-4",
       "number": 4,
       "title": "Implement email functionality",
-      "description": "highlight: 10-14"
+      "description": "The send_email method checks if the user is active before sending. This demonstrates conditional logic within a class method.",
+      "code": {
+        "language": "python",
+        "content": "class User:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n        self.is_active = True\n    \n    def deactivate(self):\n        self.is_active = False\n    \n    def send_email(self, message):\n        if self.is_active:\n            print(f\"Sending to {self.email}: {message}\")\n        else:\n            print(\"User is inactive\")",
+        "highlightLines": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ]
+      },
+      "highlightLines": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
     },
     {
       "id": "step-5",
@@ -37,9 +94,14 @@
       "description": "Now you can create users and call these methods:",
       "code": {
         "language": "python",
-        "content": "user = User(\"Alice\", \"alice@example.com\")\nuser.send_email(\"Welcome!\")\nuser.deactivate()\nuser.send_email(\"This won't send\")",
+        "content": "class User:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n        self.is_active = True\n    \n    def deactivate(self):\n        self.is_active = False\n    \n    def send_email(self, message):\n        if self.is_active:\n            print(f\"Sending to {self.email}: {message}\")\n        else:\n            print(\"User is inactive\")",
         "highlightLines": []
-      }
+      },
+      "highlightLines": []
     }
-  ]
+  ],
+  "unifiedCode": {
+    "language": "python",
+    "content": "class User:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n        self.is_active = True\n    \n    def deactivate(self):\n        self.is_active = False\n    \n    def send_email(self, message):\n        if self.is_active:\n            print(f\"Sending to {self.email}: {message}\")\n        else:\n            print(\"User is inactive\")"
+  }
 }

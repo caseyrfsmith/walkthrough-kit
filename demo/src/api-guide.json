@@ -3,7 +3,8 @@
   "metadata": {
     "title": "REST API Quick Start",
     "estimatedTime": "6 minutes",
-    "difficulty": "beginner"
+    "difficulty": "beginner",
+    "mode": "separate"
   },
   "steps": [
     {
@@ -16,7 +17,8 @@
         "content": "curl -X POST https://api.example.com/auth \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"username\": \"your-username\", \"password\": \"your-password\"}'",
         "highlightLines": []
       },
-      "notes": "Save the token from the response - you'll need it for all subsequent requests."
+      "notes": "Save the token from the response - you'll need it for all subsequent requests.",
+      "highlightLines": []
     },
     {
       "id": "step-2",
@@ -27,7 +29,8 @@
         "language": "bash",
         "content": "curl -X GET https://api.example.com/users \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\"",
         "highlightLines": []
-      }
+      },
+      "highlightLines": []
     },
     {
       "id": "step-3",
@@ -44,7 +47,8 @@
           4
         ]
       },
-      "notes": "The API returns the created user with an ID."
+      "notes": "The API returns the created user with an ID.",
+      "highlightLines": []
     },
     {
       "id": "step-4",
@@ -55,7 +59,8 @@
         "language": "bash",
         "content": "curl -X PATCH https://api.example.com/users/123 \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"email\": \"newemail@example.com\"}'",
         "highlightLines": []
-      }
+      },
+      "highlightLines": []
     },
     {
       "id": "step-5",
@@ -67,7 +72,8 @@
         "content": "curl -X DELETE https://api.example.com/users/123 \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\"",
         "highlightLines": []
       },
-      "notes": "A successful deletion returns a 204 No Content status."
+      "notes": "A successful deletion returns a 204 No Content status.",
+      "highlightLines": []
     }
   ]
 }

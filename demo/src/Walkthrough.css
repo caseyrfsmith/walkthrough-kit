@@ -12,7 +12,7 @@
   --walkthrough-border: #e0e0e0;
   --walkthrough-code-bg: #1e1e1e;
   --walkthrough-code-text: #d4d4d4;
-  --walkthrough-highlight-bg: rgba(255, 255, 0, 0.1);
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15);
   
   /* Spacing */
   --walkthrough-padding: 1.5rem;
@@ -33,6 +33,8 @@
   font-family: var(--walkthrough-font-family);
   color: var(--walkthrough-text);
   max-width: 800px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Dark theme overrides */
@@ -40,6 +42,39 @@
   --walkthrough-bg: #1a1a1a;
   --walkthrough-text: #e0e0e0;
   --walkthrough-border: #333333;
+}
+
+/* Light theme */
+.walkthrough--light {
+  --walkthrough-bg: #ffffff;
+  --walkthrough-text: #1a1a1a;
+  --walkthrough-border: #d1d5db;
+  --walkthrough-code-bg: #282c34;
+  --walkthrough-code-text: #abb2bf;
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.2);
+}
+
+/* Auto theme - respects system preference */
+@media (prefers-color-scheme: dark) {
+  .walkthrough--auto {
+    --walkthrough-bg: #1a1a1a;
+    --walkthrough-text: #e0e0e0;
+    --walkthrough-border: #333333;
+    --walkthrough-code-bg: #1e1e1e;
+    --walkthrough-code-text: #d4d4d4;
+    --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .walkthrough--auto {
+    --walkthrough-bg: #ffffff;
+    --walkthrough-text: #1a1a1a;
+    --walkthrough-border: #d1d5db;
+    --walkthrough-code-bg: #282c34;
+    --walkthrough-code-text: #abb2bf;
+    --walkthrough-highlight-bg: rgba(66, 150, 255, 0.2);
+  }
 }
 
 /* Error state */
@@ -54,7 +89,14 @@
 /* Content area */
 .walkthrough__content {
   margin-bottom: 2rem;
+  animation: fadeIn 0.3s ease-in;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* Header */
 .walkthrough__header {
@@ -83,6 +125,7 @@
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
   color: var(--walkthrough-text);
+  min-height: 10em;  /* Ensures consistent height to reduce layout shifts */
 }
 
 /* Code block */
@@ -100,6 +143,9 @@
   padding: 0.5rem 1rem;
   background: rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .walkthrough__code-language {
@@ -148,9 +194,10 @@
 
 .walkthrough__code-line--highlighted {
   background: var(--walkthrough-highlight-bg);
-  border-left: 3px solid var(--walkthrough-primary);
+  border-left: 4px solid var(--walkthrough-primary);
   margin-left: -1rem;
-  padding-left: calc(1rem - 3px);
+  padding-left: calc(1rem - 4px);
+  box-shadow: inset 0 0 0 1px rgba(66, 150, 255, 0.2);
 }
 
 .walkthrough__line-number {
@@ -238,6 +285,7 @@
 
 .walkthrough__dot:hover {
   border-color: var(--walkthrough-primary);
+  transform: scale(1.3);
 }
 
 .walkthrough__dot--active {
