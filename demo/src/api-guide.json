@@ -1,0 +1,73 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "REST API Quick Start",
+    "estimatedTime": "6 minutes",
+    "difficulty": "beginner"
+  },
+  "steps": [
+    {
+      "id": "step-1",
+      "number": 1,
+      "title": "Authenticate",
+      "description": "Get your API token by sending your credentials.",
+      "code": {
+        "language": "bash",
+        "content": "curl -X POST https://api.example.com/auth \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"username\": \"your-username\", \"password\": \"your-password\"}'",
+        "highlightLines": []
+      },
+      "notes": "Save the token from the response - you'll need it for all subsequent requests."
+    },
+    {
+      "id": "step-2",
+      "number": 2,
+      "title": "List all resources",
+      "description": "Retrieve a list of all users with the token.",
+      "code": {
+        "language": "bash",
+        "content": "curl -X GET https://api.example.com/users \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\"",
+        "highlightLines": []
+      }
+    },
+    {
+      "id": "step-3",
+      "number": 3,
+      "title": "Create a new resource",
+      "description": "Add a new user to the system.",
+      "code": {
+        "language": "bash",
+        "content": "curl -X POST https://api.example.com/users \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"name\": \"Alice\", \"email\": \"alice@example.com\"}'",
+        "highlightLines": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "notes": "The API returns the created user with an ID."
+    },
+    {
+      "id": "step-4",
+      "number": 4,
+      "title": "Update a resource",
+      "description": "Modify an existing user by ID.",
+      "code": {
+        "language": "bash",
+        "content": "curl -X PATCH https://api.example.com/users/123 \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"email\": \"newemail@example.com\"}'",
+        "highlightLines": []
+      }
+    },
+    {
+      "id": "step-5",
+      "number": 5,
+      "title": "Delete a resource",
+      "description": "Remove a user from the system.",
+      "code": {
+        "language": "bash",
+        "content": "curl -X DELETE https://api.example.com/users/123 \\\n  -H \"Authorization: Bearer YOUR_TOKEN_HERE\"",
+        "highlightLines": []
+      },
+      "notes": "A successful deletion returns a 204 No Content status."
+    }
+  ]
+}

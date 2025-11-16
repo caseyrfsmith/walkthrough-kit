@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Git Workflow Guide",
+    "estimatedTime": "5 minutes",
+    "difficulty": "beginner"
+  },
+  "steps": [
+    {
+      "id": "step-1",
+      "number": 1,
+      "title": "Create a new branch",
+      "description": "Start by creating a feature branch from main.",
+      "code": {
+        "language": "bash",
+        "content": "git checkout -b feature/new-feature",
+        "highlightLines": []
+      },
+      "notes": "This creates and switches to a new branch in one command."
+    },
+    {
+      "id": "step-2",
+      "number": 2,
+      "title": "Make your changes",
+      "description": "Stage your modified files for commit.",
+      "code": {
+        "language": "bash",
+        "content": "git add .",
+        "highlightLines": []
+      },
+      "notes": "The dot means \"add all changed files in the current directory.\""
+    },
+    {
+      "id": "step-3",
+      "number": 3,
+      "title": "Commit with a message",
+      "description": "Save your changes with a descriptive commit message.",
+      "code": {
+        "language": "bash",
+        "content": "git commit -m \"feat: add new feature\"",
+        "highlightLines": []
+      },
+      "notes": "Use conventional commit prefixes like feat:, fix:, or docs: for clarity."
+    },
+    {
+      "id": "step-4",
+      "number": 4,
+      "title": "Push to remote",
+      "description": "Upload your branch to the remote repository.",
+      "code": {
+        "language": "bash",
+        "content": "git push origin feature/new-feature",
+        "highlightLines": []
+      }
+    },
+    {
+      "id": "step-5",
+      "number": 5,
+      "title": "Create a pull request",
+      "description": "Now go to GitHub and open a pull request to merge your changes into main.",
+      "code": {
+        "language": "bash",
+        "content": "gh pr create --title \"Add new feature\" --body \"Description here\"",
+        "highlightLines": []
+      },
+      "notes": "This requires the GitHub CLI (gh) to be installed."
+    }
+  ]
+}
