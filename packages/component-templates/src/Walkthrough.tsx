@@ -11,7 +11,7 @@ import { tokenize, getTokenColor } from './lexer/index.js';
 export function Walkthrough({
   steps,
   initialStep = 0,
-  theme = 'dark',
+  theme = 'auto',
   onStepChange,
   className = '',
 }: WalkthroughProps) {

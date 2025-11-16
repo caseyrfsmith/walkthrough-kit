@@ -42,6 +42,39 @@
   --walkthrough-border: #333333;
 }
 
+/* Light theme */
+.walkthrough--light {
+  --walkthrough-bg: #ffffff;
+  --walkthrough-text: #1a1a1a;
+  --walkthrough-border: #d1d5db;
+  --walkthrough-code-bg: #282c34;
+  --walkthrough-code-text: #abb2bf;
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.2);
+}
+
+/* Auto theme - respects system preference */
+@media (prefers-color-scheme: dark) {
+  .walkthrough--auto {
+    --walkthrough-bg: #1a1a1a;
+    --walkthrough-text: #e0e0e0;
+    --walkthrough-border: #333333;
+    --walkthrough-code-bg: #1e1e1e;
+    --walkthrough-code-text: #d4d4d4;
+    --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .walkthrough--auto {
+    --walkthrough-bg: #ffffff;
+    --walkthrough-text: #1a1a1a;
+    --walkthrough-border: #d1d5db;
+    --walkthrough-code-bg: #282c34;
+    --walkthrough-code-text: #abb2bf;
+    --walkthrough-highlight-bg: rgba(66, 150, 255, 0.2);
+  }
+}
+
 /* Error state */
 .walkthrough-error {
   padding: 1rem;
