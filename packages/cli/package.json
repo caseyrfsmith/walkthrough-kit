@@ -1,6 +1,7 @@
 {
   "name": "walkthrough-kit",
   "version": "0.1.0",
+  "type": "module",
   "description": "Generate interactive code walkthroughs from markdown",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

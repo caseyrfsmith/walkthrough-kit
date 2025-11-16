@@ -1,6 +1,7 @@
 {
   "name": "@walkthrough-kit/parser",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "description": "Parse markdown and freeform text into walkthrough JSON",
   "main": "./dist/index.js",

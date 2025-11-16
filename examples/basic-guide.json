@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Quick Start Guide",
+    "estimatedTime": "5 minutes",
+    "difficulty": "beginner"
+  },
+  "steps": [
+    {
+      "id": "step-1",
+      "number": 1,
+      "title": "Install the SDK",
+      "description": "Install the package from your preferred package manager.",
+      "code": {
+        "language": "bash",
+        "content": "npm install @mycompany/sdk",
+        "highlightLines": []
+      }
+    },
+    {
+      "id": "step-2",
+      "number": 2,
+      "title": "Initialize the client",
+      "description": "Import and configure the client with your API key.",
+      "code": {
+        "language": "javascript",
+        "content": "import { Client } from '@mycompany/sdk';\n\nconst client = new Client({\n  apiKey: process.env.API_KEY\n});",
+        "highlightLines": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "notes": "This creates a client instance that you'll use for all API calls."
+    },
+    {
+      "id": "step-3",
+      "number": 3,
+      "title": "Make your first request",
+      "description": "Now you can start making API calls.",
+      "code": {
+        "language": "javascript",
+        "content": "const response = await client.users.list({\n  limit: 10\n});\n\nconsole.log(response.data);",
+        "highlightLines": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "notes": "The response includes pagination data and the requested users."
+    }
+  ]
+}

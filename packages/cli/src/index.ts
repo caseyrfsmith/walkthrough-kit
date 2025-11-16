@@ -2,6 +2,7 @@
 
 import { Command } from 'commander';
 import chalk from 'chalk';
+import { createCommand } from './commands/create.js';
 
 const program = new Command();
 
@@ -23,11 +24,7 @@ program
   .command('create <input>')
   .description('Generate walkthrough JSON from markdown')
   .option('--ai', 'Use AI to extract structure from freeform text')
-  .action(async (input: string, options: { ai?: boolean }) => {
-    console.log(chalk.blue(`📝 Creating walkthrough from ${input}...\n`));
-    // TODO: Implement create command
-    console.log(chalk.yellow('Coming soon!'));
-  });
+  .action(createCommand);
 
 program
   .command('validate <file>')

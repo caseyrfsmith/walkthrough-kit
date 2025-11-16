@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "My Test Walkthrough",
+    "estimatedTime": "3 minutes",
+    "difficulty": "beginner"
+  },
+  "steps": [
+    {
+      "id": "step-1",
+      "number": 1,
+      "title": "Prerequisites",
+      "description": "Make sure you're ready to go!"
+    },
+    {
+      "id": "step-2",
+      "number": 2,
+      "title": "Install dependencies",
+      "description": "Run the installer.",
+      "code": {
+        "language": "bash",
+        "content": "npm install",
+        "highlightLines": []
+      }
+    },
+    {
+      "id": "step-3",
+      "number": 3,
+      "title": "Start coding",
+      "description": "No code block here - just instructions!"
+    },
+    {
+      "id": "step-4",
+      "number": 4,
+      "title": "Run the app",
+      "description": "This starts your application.",
+      "code": {
+        "language": "javascript",
+        "content": "const app = require('./app');\napp.start();",
+        "highlightLines": [
+          1,
+          2
+        ]
+      }
+    }
+  ]
+}
