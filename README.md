@@ -21,7 +21,7 @@ A CLI tool that transforms documentation into interactive code walkthroughs. You
 - Init command: Coming soon (generates component library for users)
 - AI mode: Coming soon (extract structure from freeform text)
 
-## Quick Start
+## Quick start
 
 ### 1. Install dependencies
 ```bash
@@ -120,9 +120,9 @@ cd demo
 npm run dev
 ```
 
-## Example Markdown
+## Example markdown
 
-```markdown
+````markdown
 ---
 title: Quick Start Guide
 estimatedTime: 5 minutes
@@ -150,7 +150,7 @@ const client = new Client({
 ```
 
 This creates a client instance for all API calls.
-```
+````
 
 ## Project goals
 
