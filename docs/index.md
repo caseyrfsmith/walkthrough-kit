@@ -11,7 +11,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: View on GitHub
-      link: https://github.com/anthropics/walkthrough-kit
+      link: https://github.com/caseyrfsmith/walkthrough-kit
 
 features:
   - title: Markdown parser

@@ -7,7 +7,7 @@
 Currently, walkthrough-kit is a starter kit. Clone the repository:
 
 ```bash
-git clone https://github.com/anthropics/walkthrough-kit.git
+git clone https://github.com/caseyrfsmith/walkthrough-kit.git
 cd walkthrough-kit
 ```
 

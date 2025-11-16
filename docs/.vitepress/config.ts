@@ -8,7 +8,7 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Guide', link: '/guide/' },
-      { text: 'GitHub', link: 'https://github.com/anthropics/walkthrough-kit' }
+      { text: 'GitHub', link: 'https://github.com/caseyrfsmith/walkthrough-kit' }
     ],
 
     sidebar: [
@@ -41,7 +41,7 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/anthropics/walkthrough-kit' }
+      { icon: 'github', link: 'https://github.com/caseyrfsmith/walkthrough-kit' }
     ],
 
     footer: {
