@@ -2,13 +2,15 @@
 
 Generate interactive code walkthroughs from markdown.
 
+📚 **[View Documentation Site](https://caseyrfsmith.github.io/walkthrough-kit/)** (TODO: Update URL after deploying)
+
 ## What is this?
 
 A CLI tool that transforms documentation into interactive code walkthroughs. You write markdown (or freeform text), and the CLI generates:
 1. A complete React component library (that you own and customize)
 2. JSON data files for each walkthrough
 
-**This is a starter kit, not a maintained product.** Once generated, the code is yours to modify, extend, and maintain however you want.
+**This is a starter kit, not a maintained product.** After you generate it, the code is yours to modify, extend, and maintain however you want.
 
 ## Status
 
