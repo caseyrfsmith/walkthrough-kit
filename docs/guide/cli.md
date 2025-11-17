@@ -64,21 +64,84 @@ AI-generated content should be reviewed for accuracy. The CLI will display a war
 
 ## walkthrough init
 
-::: warning Coming soon
-This command is not yet implemented.
-:::
-
-Generate the React component library in your project.
+Copy the Walkthrough component library into your project.
 
 ```bash
-walkthrough init [directory]
+walkthrough init
 ```
 
-### What it will do
+### What it does
 
-- Copy component files to your project
-- Install necessary dependencies
-- Generate example usage code
+The init command sets up walkthrough-kit in your project by:
+
+1. **Prompting for directories**
+   - Where to put the component files (default: `src/components/walkthrough`)
+   - Where to store walkthrough data (default: `src/data`)
+   - Whether to create an example walkthrough
+
+2. **Copying component files**
+   - `Walkthrough.tsx` - Main React component
+   - `Walkthrough.css` - Styles
+   - `types.ts` - TypeScript types
+   - `hooks/` - Custom hooks (step navigation)
+   - `lexer/` - Syntax highlighting engine
+
+3. **Creating an example** (optional)
+   - Generates `example-walkthrough.md` in your data directory
+   - Shows you the command to convert it to JSON
+
+### Example usage
+
+```bash
+# Run the init command
+walkthrough init
+
+# Follow the prompts:
+# ✔ Where should we put the component? … src/components/walkthrough
+# ✔ Where should walkthrough data go? … src/data
+# ✔ Create an example walkthrough? … yes
+
+# ✓ Component files copied
+# ✓ Example created at src/data/example-walkthrough.md
+```
+
+After running init, you'll have:
+
+```
+your-project/
+├── src/
+│   ├── components/
+│   │   └── walkthrough/
+│   │       ├── Walkthrough.tsx
+│   │       ├── Walkthrough.css
+│   │       ├── types.ts
+│   │       ├── index.ts
+│   │       ├── hooks/
+│   │       └── lexer/
+│   └── data/
+│       └── example-walkthrough.md
+```
+
+### Next steps after init
+
+1. Generate JSON from your markdown:
+   ```bash
+   walkthrough create src/data/example-walkthrough.md
+   ```
+
+2. Import and use the component:
+   ```tsx
+   import { Walkthrough } from './components/walkthrough';
+   import steps from './data/example-walkthrough.json';
+
+   export function MyPage() {
+     return <Walkthrough steps={steps} />;
+   }
+   ```
+
+::: tip You own the code!
+The component files are copied into your project, not installed as a dependency. You can customize them however you want - modify styles, add features, or adjust the lexer.
+:::
 
 ## walkthrough validate
 

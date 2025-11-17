@@ -3,6 +3,7 @@
 import { Command } from 'commander';
 import chalk from 'chalk';
 import { createCommand } from './commands/create.js';
+import { initCommand } from './commands/init.js';
 
 const program = new Command();
 
@@ -16,8 +17,7 @@ program
   .description('Generate walkthrough component library')
   .action(async () => {
     console.log(chalk.blue('🎯 Initializing walkthrough-kit...\n'));
-    // TODO: Implement init command
-    console.log(chalk.yellow('Coming soon!'));
+    await initCommand(); 
   });
 
 program

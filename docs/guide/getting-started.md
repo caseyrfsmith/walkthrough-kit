@@ -27,7 +27,17 @@ pnpm build
 
 This compiles the CLI, parser, and component packages.
 
-### 4. Test the CLI
+### 4. Initialize in your project (optional)
+
+You can copy the component library to your own project:
+
+```bash
+node packages/cli/dist/index.js init
+```
+
+This will prompt you for directories and copy the component files.
+
+### 5. Test the CLI
 
 ```bash
 node packages/cli/dist/index.js create examples/basic-guide.md
@@ -35,7 +45,7 @@ node packages/cli/dist/index.js create examples/basic-guide.md
 
 This generates `examples/basic-guide.json`
 
-### 5. Run the demo
+### 6. Run the demo
 
 ```bash
 cd demo

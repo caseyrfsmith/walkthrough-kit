@@ -21,7 +21,7 @@ A CLI tool that transforms documentation into interactive code walkthroughs. You
 - React component: Full-featured walkthrough UI with custom syntax highlighting
 - Demo: Working Vite demo showing the component in action
 - AI mode: Extract structure from freeform text using Claude AI
-- Init command: Coming soon (generates component library for users)
+- Init command: Copy component library into your project
 
 ## Quick start
 
@@ -88,15 +88,15 @@ walkthrough-kit/
 ## Commands
 
 ```bash
+# Copy component library to your project
+walkthrough init
+
 # Create walkthrough from markdown
 walkthrough create guide.md
 
 # Create walkthrough from freeform text with AI
 walkthrough create notes.txt --ai
 walkthrough create notes.txt --ai --api-key YOUR_KEY
-
-# Generate component library (coming soon)
-walkthrough init
 
 # Validate JSON structure (coming soon)
 walkthrough validate guide.json
@@ -163,6 +163,14 @@ This creates a client instance for all API calls.
 - Extensible (custom languages, themes)
 - Beautiful CLI experience
 - AI-powered extraction from freeform text
+
+## TODOs
+
+- Add examples/tutorials for using the component with different generators
+
+## Why I built this
+
+I'ved wanted to use [CodeHike](https://codehike.org/) for a long time on documentation projects at work. I've always been stuck with tooling that, if it allows custom components, doesn't allow imports. This kinda hampers less technical technical writers, so I wanted to make something that more people could use. Also [a friend](https://github.com/elias-michaias) showed me just how cool you can make zero-dependency components for sites, so I definitely owe him for even knowing this was possible.
 
 ## License
 
