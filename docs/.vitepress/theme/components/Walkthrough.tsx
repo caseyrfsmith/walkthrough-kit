@@ -1,0 +1,228 @@
+import React, { useState, useEffect } from 'react';
+import type { WalkthroughProps, Step, CodeBlock } from './types.js';
+import { useStepNavigation } from './hooks/useStepNavigation.js';
+import { tokenize, getTokenColor } from './lexer/index.js';
+
+/**
+ * Walkthrough Component
+ * 
+ * Displays interactive step-by-step code walkthroughs with syntax highlighting
+ */
+export function Walkthrough({
+  steps,
+  initialStep = 0,
+  theme = 'auto',
+  onStepChange,
+  className = '',
+  unifiedCode,
+  minHeight,
+  descriptionHeight
+}: WalkthroughProps) {
+  const {
+    currentStep,
+    goToStep,
+    nextStep,
+    previousStep,
+    canGoNext,
+    canGoPrevious,
+  } = useStepNavigation(steps.length, initialStep, onStepChange);
+
+  // Keyboard navigation
+    useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'ArrowLeft' && canGoPrevious) {
+        previousStep();
+        } else if (e.key === 'ArrowRight' && canGoNext) {
+        nextStep();
+        }
+    };
+
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, [canGoNext, canGoPrevious, nextStep, previousStep]);
+
+  const step = steps[currentStep];
+
+
+  if (!step) {
+    return <div className="walkthrough-error">No steps available</div>;
+  }
+
+  // Determine which code to display
+    const codeToDisplay = unifiedCode 
+    ? { 
+        language: unifiedCode.language, 
+        content: unifiedCode.content, 
+        highlightLines: step.highlightLines || [] 
+      }
+    : step.code;
+
+  return (
+    <div className={`walkthrough walkthrough--${theme} ${className}`} style={{ minHeight }}>
+      {/* Live region for screen reader announcements */}
+        <div 
+          role="status" 
+          aria-live="polite" 
+          aria-atomic="true"
+          className="sr-only"
+        >
+          Step {step.number} of {steps.length}: {step.title}
+        </div>
+        {/* Keyboard navigation instructions (screen reader only) */}
+        <div className="sr-only">
+          Use arrow keys to navigate between steps. Left arrow for previous, right arrow for next.
+        </div>
+      {/* Step Content */}
+      <main className="walkthrough__content" aria-label="Current step content">
+        {/* Step Header */}
+        <div className="walkthrough__header">
+          <div className="walkthrough__step-number">
+            Step {step.number} of {steps.length}
+          </div>
+            <h3 
+              className="walkthrough__title"
+              id={`step-${step.number}-heading`}
+              tabIndex={-1}
+            >
+              {step.title}
+            </h3>
+        </div>
+
+        {/* Description */}
+        <p 
+          className="walkthrough__description"
+          style={{ minHeight: descriptionHeight }}
+        >
+          {step.description}
+        </p>
+
+        {/* Code Block (if present) */}
+        {codeToDisplay && <CodeBlockRenderer code={codeToDisplay} />}
+
+        {/* Notes (if present) */}
+        {step.notes && (
+          <div className="walkthrough__notes">
+            <p>{step.notes}</p>
+          </div>
+        )}
+      </main>
+
+      {/* Navigation */}
+      <nav className="walkthrough__navigation" aria-label="Walkthrough step navigation">
+        {/* Previous/Next Buttons */}
+        <div className="walkthrough__buttons">
+          <button
+            className="walkthrough__button walkthrough__button--prev"
+            onClick={previousStep}
+            disabled={!canGoPrevious}
+            aria-label={canGoPrevious ? `Previous step: ${steps[currentStep - 1].title}` : "No previous step"}
+          >
+            ← Previous
+          </button>
+          <button
+            className="walkthrough__button walkthrough__button--next"
+            onClick={nextStep}
+            disabled={!canGoNext}
+            aria-label={canGoNext ? `Next step: ${steps[currentStep + 1].title}` : "No next step"}          
+          >
+            Next →
+          </button>
+        </div>
+
+        {/* Dot Indicators */}
+        <div className="walkthrough__dots">
+          {steps.map((_, index) => (
+            <button
+              key={index}
+              className={`walkthrough__dot ${
+                index === currentStep ? 'walkthrough__dot--active' : ''
+              }`}
+              onClick={() => goToStep(index)}
+              aria-label={`Go to step ${index + 1}: ${steps[index].title}`}
+              aria-current={index === currentStep ? 'step' : undefined}
+            />
+          ))}
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+/**
+ * Code Block Renderer with Syntax Highlighting
+ */
+/**
+ */
+
+function CodeBlockRenderer({ code }: { code: CodeBlock }) {
+  const [copied, setCopied] = useState(false);
+  
+  // Split code into lines
+  const lines = code.content.split('\n');
+  
+  // Copy to clipboard handler
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code.content);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
+  return (
+    <div className="walkthrough__code-block">
+      {/* Language label and copy button */}
+      <div className="walkthrough__code-header">
+        <span className="walkthrough__code-language">{code.language}</span>
+          <button
+            className="walkthrough__copy-button"
+            onClick={handleCopy}
+            aria-label={copied ? "Code copied to clipboard" : `Copy ${code.language} code to clipboard`}
+            aria-live="polite"
+          >
+            {copied ? '✓' : 'Copy'}
+          </button>
+      </div>
+      {/* Code content */}
+      <pre 
+        className="walkthrough__code"
+        role="region"
+        aria-label={`Code example in ${code.language}`}
+        tabIndex={0}
+      >
+        <code>
+          {lines.map((line, lineIndex) => {
+            const lineNumber = lineIndex + 1;
+            const isHighlighted = code.highlightLines.includes(lineNumber);
+            
+            // Tokenize this line
+            const tokens = tokenize(line, code.language);
+            
+            return (
+              <div
+                key={lineIndex}
+                className={`walkthrough__code-line ${
+                  isHighlighted ? 'walkthrough__code-line--highlighted' : ''
+                }`}
+              >
+                <span className="walkthrough__line-number">{lineNumber}</span>
+                <span className="walkthrough__line-content">
+                  {tokens.map((token, tokenIndex) => (
+                    <span
+                      key={tokenIndex}
+                      style={{ color: getTokenColor(token.type) }}
+                    >
+                      {token.value}
+                    </span>
+                  ))}
+                </span>
+              </div>
+            );
+          })}
+        </code>
+      </pre>
+    </div>
+  );
+}

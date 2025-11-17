@@ -1,9 +1,14 @@
 import { defineConfig } from 'vitepress'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   title: 'Walkthrough Kit',
   description: 'Generate interactive code walkthroughs from markdown',
   base: '/walkthrough-kit/',
+
+  vite: {
+    plugins: [react() as any] // VitePress uses Vite 3, so we need to cast the plugin type
+  },
 
   themeConfig: {
     nav: [

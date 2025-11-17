@@ -1,0 +1,323 @@
+/**
+ * Walkthrough Component Styles
+ * 
+ * Uses CSS variables for easy customization
+ */
+
+.walkthrough {
+  /* Color variables - users can override these */
+  --walkthrough-primary: #0066cc;
+  --walkthrough-bg: #ffffff;
+  --walkthrough-text: #1a1a1a;
+  --walkthrough-border: #e0e0e0;
+  --walkthrough-code-bg: #1e1e1e;
+  --walkthrough-code-text: #d4d4d4;
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15);
+  
+  /* Spacing */
+  --walkthrough-padding: 1.5rem;
+  --walkthrough-gap: 1rem;
+  
+  /* Border radius */
+  --walkthrough-radius: 8px;
+  
+  /* Fonts */
+  --walkthrough-font-family: inherit;
+  --walkthrough-code-font: 'Monaco', 'Courier New', monospace;
+  
+  /* Actual styles */
+  background: var(--walkthrough-bg);
+  border: 1px solid var(--walkthrough-border);
+  border-radius: var(--walkthrough-radius);
+  padding: var(--walkthrough-padding);
+  font-family: var(--walkthrough-font-family);
+  color: var(--walkthrough-text);
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dark theme overrides */
+.walkthrough--dark {
+  --walkthrough-bg: #1a1a1a;
+  --walkthrough-text: #e0e0e0;
+  --walkthrough-border: #333333;
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15); 
+}
+
+/* Light theme */
+.walkthrough--light {
+  --walkthrough-bg: #ffffff;
+  --walkthrough-text: #1a1a1a;
+  --walkthrough-border: #d1d5db;
+  --walkthrough-code-bg: #282c34;
+  --walkthrough-code-text: #abb2bf;
+  --walkthrough-highlight-bg: rgba(66, 150, 255, 0.2);
+}
+
+/* Auto theme - respects system preference */
+@media (prefers-color-scheme: dark) {
+  .walkthrough--auto {
+    --walkthrough-bg: #1a1a1a;
+    --walkthrough-text: #e0e0e0;
+    --walkthrough-border: #333333;
+    --walkthrough-code-bg: #1e1e1e;
+    --walkthrough-code-text: #d4d4d4;
+    --walkthrough-highlight-bg: rgba(66, 150, 255, 0.15);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .walkthrough--auto {
+    --walkthrough-bg: #ffffff;
+    --walkthrough-text: #1a1a1a;
+    --walkthrough-border: #d1d5db;
+    --walkthrough-code-bg: #282c34;
+    --walkthrough-code-text: #abb2bf;
+    --walkthrough-highlight-bg: rgba(66, 150, 255, 0.2);
+  }
+}
+
+/* Error state */
+.walkthrough-error {
+  padding: 1rem;
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 4px;
+  color: #c33;
+}
+
+/* Content area */
+.walkthrough__content {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Header */
+.walkthrough__header {
+  margin-bottom: 1rem;
+}
+
+.walkthrough__step-number {
+  font-size: 0.875rem;
+  color: var(--walkthrough-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.walkthrough__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--walkthrough-text);
+}
+
+/* Description */
+.walkthrough__description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  color: var(--walkthrough-text);
+  min-height: 10em;  /* Ensures consistent height to reduce layout shifts */
+}
+
+/* Code block */
+.walkthrough__code-block {
+  margin: 1.5rem 0;
+  border-radius: var(--walkthrough-radius);
+  overflow: hidden;
+  background: var(--walkthrough-code-bg);
+}
+
+.walkthrough__code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.walkthrough__code-language {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #888;
+  letter-spacing: 0.05em;
+}
+
+.walkthrough__copy-button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #888;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.walkthrough__copy-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.walkthrough__code {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: var(--walkthrough-code-font);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  background: var(--walkthrough-code-bg);
+  color: var(--walkthrough-code-text);
+}
+
+.walkthrough__code code {
+  display: block;
+}
+
+.walkthrough__code-line {
+  display: flex;
+  padding: 0.125rem 0;
+}
+
+.walkthrough__code-line--highlighted {
+  background: var(--walkthrough-highlight-bg);
+  border-left: 4px solid var(--walkthrough-primary);
+  margin-left: -1rem;
+  padding-left: calc(1rem - 4px);
+  box-shadow: inset 0 0 0 1px rgba(66, 150, 255, 0.2);
+}
+
+.walkthrough__line-number {
+  display: inline-block;
+  width: 3em;
+  text-align: right;
+  margin-right: 1.5rem;
+  color: #5c6370;
+  user-select: none;
+}
+
+.walkthrough__line-content {
+  flex: 1;
+}
+
+/* Notes */
+.walkthrough__notes {
+  padding: 1rem;
+  background: rgba(0, 102, 204, 0.05);
+  border-left: 3px solid var(--walkthrough-primary);
+  border-radius: 4px;
+  margin-top: 1.5rem;
+}
+
+.walkthrough__notes p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--walkthrough-text);
+}
+
+/* Navigation */
+.walkthrough__navigation {
+  border-top: 1px solid var(--walkthrough-border);
+  padding-top: 1.5rem;
+}
+
+.walkthrough__buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.walkthrough__button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: var(--walkthrough-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.walkthrough__button:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.walkthrough__button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Dots navigation */
+.walkthrough__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.walkthrough__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--walkthrough-border);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.walkthrough__dot:hover {
+  border-color: var(--walkthrough-primary);
+  transform: scale(1.3);
+}
+
+.walkthrough__dot--active {
+  background: var(--walkthrough-primary);
+  border-color: var(--walkthrough-primary);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .walkthrough {
+    --walkthrough-padding: 1rem;
+  }
+}
+  
+  .walkthrough__buttons {
+    flex-direction: column;
+  }
+  
+  .walkthrough__code {
+    font-size: 0.75rem;
+  }
+
+  /* Screen reader only - hides visually but keeps for assistive tech */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }

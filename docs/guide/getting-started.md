@@ -1,5 +1,19 @@
 # Getting started
 
+Getting started with Walkthrough Kit is easy. Try out the walkthrough component here, or use the written instructions in [Installation](#installation).
+
+<script setup>
+import WalkthroughWrapper from '../.vitepress/theme/components/WalkthroughWrapper.vue'
+import steps from './getting-started.json'
+</script>
+
+<WalkthroughWrapper 
+  :steps="steps.steps" 
+  description-height="2rem"
+  min-height="600px"
+/>
+
+
 ## Installation
 
 ### 1. Clone the repository

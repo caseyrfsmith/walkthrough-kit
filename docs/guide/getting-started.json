@@ -1,0 +1,86 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Setting up Walkthrough Kit",
+    "estimatedTime": "10 minutes",
+    "difficulty": "beginner",
+    "mode": "separate"
+  },
+  "steps": [
+    {
+      "id": "step-1",
+      "number": 1,
+      "title": "Clone the repository",
+      "description": "Clone the walkthrough-kit repository and navigate to the project directory.",
+      "code": {
+        "language": "bash",
+        "content": "git clone https://github.com/caseyrfsmith/walkthrough-kit.git\ncd walkthrough-kit",
+        "highlightLines": []
+      },
+      "highlightLines": []
+    },
+    {
+      "id": "step-2",
+      "number": 2,
+      "title": "Install dependencies",
+      "description": "Install all dependencies using pnpm package manager for this monorepo.",
+      "code": {
+        "language": "bash",
+        "content": "pnpm install",
+        "highlightLines": []
+      },
+      "highlightLines": []
+    },
+    {
+      "id": "step-3",
+      "number": 3,
+      "title": "Build all packages",
+      "description": "Build the CLI, parser, and component packages to compile everything.",
+      "code": {
+        "language": "bash",
+        "content": "pnpm build",
+        "highlightLines": []
+      },
+      "highlightLines": []
+    },
+    {
+      "id": "step-4",
+      "number": 4,
+      "title": "Initialize in your project (optional)",
+      "description": "Copy the component library to your own project directory.",
+      "code": {
+        "language": "bash",
+        "content": "node packages/cli/dist/index.js init",
+        "highlightLines": []
+      },
+      "notes": "This will prompt you for directories and copy the component files.",
+      "highlightLines": []
+    },
+    {
+      "id": "step-5",
+      "number": 5,
+      "title": "Test the CLI",
+      "description": "Test the CLI by generating a JSON walkthrough from the example markdown file.",
+      "code": {
+        "language": "bash",
+        "content": "node packages/cli/dist/index.js create examples/basic-guide.md",
+        "highlightLines": []
+      },
+      "notes": "This generates examples/basic-guide.json",
+      "highlightLines": []
+    },
+    {
+      "id": "step-6",
+      "number": 6,
+      "title": "Run the demo",
+      "description": "Start the demo application to see the interactive walkthrough component in action.",
+      "code": {
+        "language": "bash",
+        "content": "cd demo\nnpm install\nnpm run dev",
+        "highlightLines": []
+      },
+      "notes": "Open your browser to see the interactive walkthrough component.",
+      "highlightLines": []
+    }
+  ]
+}
