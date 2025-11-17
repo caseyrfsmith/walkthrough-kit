@@ -5,6 +5,7 @@ import pythonClass from './python-class.json';
 import gitWorkflow from './git-workflow.json';
 import apiGuide from './api-guide.json';
 import './Walkthrough.css';
+import './App.css';
 import type { WalkthroughData } from '../../packages/parser/src/types';
 
 const examples: Array<{ name: string; data: WalkthroughData }> = [
@@ -17,41 +18,27 @@ const examples: Array<{ name: string; data: WalkthroughData }> = [
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('auto');
   const [selectedExample, setSelectedExample] = useState(0);
-  
+
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <h1>Walkthrough Kit demo</h1>
+        
         <div style={{ display: 'flex', gap: '1rem', margin: '0.5rem 1rem 0' }}>
           <select 
             value={selectedExample} 
             onChange={(e) => setSelectedExample(Number(e.target.value))}
-            style={{ 
-              padding: '0.5rem 1rem',
-              fontSize: '0.875rem',
-              border: '1px solid #d1d5db',
-              borderRadius: '6px',
-              background: 'white',
-              cursor: 'pointer',
-              fontWeight: '500'
-            }}
+            className="demo-select"
           >
             {examples.map((ex, i) => (
               <option key={i} value={i}>{ex.name}</option>
             ))}
           </select>
+
           <select 
             value={theme} 
             onChange={(e) => setTheme(e.target.value as any)}
-            style={{ 
-              padding: '0.5rem 1rem',
-              fontSize: '0.875rem',
-              border: '1px solid #d1d5db',
-              borderRadius: '6px',
-              background: 'white',
-              cursor: 'pointer',
-              fontWeight: '500'
-            }}
+            className="demo-select"
           >
             <option value="auto">Auto</option>
             <option value="light">Light</option>
@@ -59,7 +46,15 @@ function App() {
           </select>
         </div>
       </div>
-      <Walkthrough key={selectedExample} steps={examples[selectedExample].data.steps} theme={theme} unifiedCode={examples[selectedExample].data.unifiedCode} minHeight='800px' descriptionHeight='2rem' />
+
+      <Walkthrough 
+        key={selectedExample} 
+        steps={examples[selectedExample].data.steps} 
+        theme={theme} 
+        unifiedCode={examples[selectedExample].data.unifiedCode} 
+        minHeight='600px' 
+        descriptionHeight='2rem' 
+      />
     </div>
   );
 }
