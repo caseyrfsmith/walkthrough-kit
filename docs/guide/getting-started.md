@@ -102,6 +102,43 @@ export function MyWalkthrough() {
 }
 ```
 
+## AI mode (optional)
+
+Want to convert existing documentation without formatting it as structured markdown? Use AI mode, which uses the Claude API:
+
+```bash
+# Set your Anthropic API key (or add it to your .env file)
+export ANTHROPIC_API_KEY=your-key-here
+
+# Convert any text file to a walkthrough
+walkthrough create your-notes.txt --ai
+```
+
+The AI will analyze your content and automatically:
+- Identify logical steps in your documentation
+- Extract code blocks and detect languages
+- Generate step titles and descriptions
+- Create a properly structured walkthrough JSON
+
+Example input (freeform text):
+
+```text
+To get started with our API, first install the SDK using npm.
+Run: npm install @mycompany/sdk
+
+Then you need to initialize the client. Import the Client class
+and create an instance with your API key from the dashboard.
+
+import { Client } from '@mycompany/sdk';
+const client = new Client({ apiKey: process.env.API_KEY });
+
+Now you can make API calls using the client...
+```
+
+The AI converts this into a structured walkthrough with clear steps, extracted code blocks, and proper formatting.
+
+AI mode is great for quickly converting existing READMEs or documentation, processing unstructured notes into walkthroughs, and quick prototyping.
+
 ## Next steps
 
 - [CLI commands](/guide/cli) - Learn all available commands

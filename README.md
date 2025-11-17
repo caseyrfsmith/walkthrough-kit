@@ -20,8 +20,8 @@ A CLI tool that transforms documentation into interactive code walkthroughs. You
 - CLI: `walkthrough create` command generates walkthrough data
 - React component: Full-featured walkthrough UI with custom syntax highlighting
 - Demo: Working Vite demo showing the component in action
+- AI mode: Extract structure from freeform text using Claude AI
 - Init command: Coming soon (generates component library for users)
-- AI mode: Coming soon (extract structure from freeform text)
 
 ## Quick start
 
@@ -88,14 +88,15 @@ walkthrough-kit/
 ## Commands
 
 ```bash
-# Create walkthrough from markdown (working!)
+# Create walkthrough from markdown
 walkthrough create guide.md
+
+# Create walkthrough from freeform text with AI
+walkthrough create notes.txt --ai
+walkthrough create notes.txt --ai --api-key YOUR_KEY
 
 # Generate component library (coming soon)
 walkthrough init
-
-# Create walkthrough from freeform text with AI (coming soon)
-walkthrough create notes.txt --ai
 
 # Validate JSON structure (coming soon)
 walkthrough validate guide.json

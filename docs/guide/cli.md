@@ -16,18 +16,51 @@ walkthrough create <input> [options]
 
 ### Options
 
-- `--ai` - use AI to extract structure from freeform text (coming soon)
+- `--ai` - use AI to extract structure from freeform text (requires Anthropic API key)
+- `--api-key <key>` - provide Anthropic API key (alternative to ANTHROPIC_API_KEY env var)
 
 ### Examples
 
+#### Basic usage
+
 ```bash
-# Basic usage
+# Parse markdown file
 walkthrough create guide.md
 
 # Creates guide.json in the same directory
 walkthrough create examples/api-guide.md
 # Output: examples/api-guide.json
 ```
+
+#### AI mode
+
+Use the Claude API to extract walkthrough structure from freeform text or unstructured documentation:
+
+```bash
+# Using environment variable
+export ANTHROPIC_API_KEY=your-key-here
+walkthrough create notes.txt --ai
+
+# Using command line option
+walkthrough create notes.txt --ai --api-key your-key-here
+
+# Works with markdown files too
+walkthrough create unstructured-doc.md --ai
+```
+
+The AI mode will:
+- Analyze the content and identify logical steps
+- Extract code blocks with correct language detection
+- Generate titles and descriptions for each step
+- Determine if the walkthrough should use separate or unified mode
+- Create properly structured JSON output
+
+AI mode is perfect for converting existing documentation, README files, or freeform notes into interactive walkthroughs without manually formatting them.
+
+::: warning Review AI output
+AI-generated content should be reviewed for accuracy. The CLI will display a warning after generation.
+:::
+
 
 ## walkthrough init
 

@@ -31,7 +31,8 @@ export default defineConfig({
         text: 'Customization',
         items: [
           { text: 'Styling', link: '/guide/styling' },
-          { text: 'Custom languages', link: '/guide/custom-languages' }
+          { text: 'Custom languages', link: '/guide/custom-languages' },
+          { text: 'Customize LLM Parser', link: '/guide/custom-llm-parser' }
         ]
       },
       {
