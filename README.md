@@ -171,7 +171,6 @@ This creates a client instance for all API calls.
   - Fern
   - Mintlify
   - Generic React apps
-- ARIA labels/max accessibility on the components
 - Add actual walkthroughs to the docs for this project
 - CLI validate command (Optional)
     - Validate JSON structure
