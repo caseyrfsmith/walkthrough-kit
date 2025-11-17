@@ -167,6 +167,15 @@ This creates a client instance for all API calls.
 ## TODO
 
 - Add examples/tutorials for using the component with different generators
+  - Docusaurus
+  - Fern
+  - Mintlify
+  - Generic React apps
+- ARIA labels/max accessibility on the components
+- Add actual walkthroughs to the docs for this project
+- CLI validate command (Optional)
+    - Validate JSON structure
+    - Check for errors/warnings
 
 ## Why I built this
 
