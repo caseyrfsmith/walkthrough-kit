@@ -32,16 +32,11 @@ jobs:
         with:
           version: 8
 
-      - name: Install root dependencies
+      - name: Install dependencies
         run: pnpm install
-
-      - name: Install docs dependencies
-        run: pnpm install
-        working-directory: ./docs
 
       - name: Build documentation site
-        run: pnpm run build
-        working-directory: ./docs
+        run: pnpm --filter docs build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
