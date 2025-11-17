@@ -59,14 +59,33 @@ export function Walkthrough({
 
   return (
     <div className={`walkthrough walkthrough--${theme} ${className}`} style={{ minHeight }}>
+      {/* Live region for screen reader announcements */}
+        <div 
+          role="status" 
+          aria-live="polite" 
+          aria-atomic="true"
+          className="sr-only"
+        >
+          Step {step.number} of {steps.length}: {step.title}
+        </div>
+        {/* Keyboard navigation instructions (screen reader only) */}
+        <div className="sr-only">
+          Use arrow keys to navigate between steps. Left arrow for previous, right arrow for next.
+        </div>
       {/* Step Content */}
-      <div className="walkthrough__content">
+      <main className="walkthrough__content" aria-label="Current step content">
         {/* Step Header */}
         <div className="walkthrough__header">
           <div className="walkthrough__step-number">
             Step {step.number} of {steps.length}
           </div>
-          <h3 className="walkthrough__title">{step.title}</h3>
+            <h3 
+              className="walkthrough__title"
+              id={`step-${step.number}-heading`}
+              tabIndex={-1}
+            >
+              {step.title}
+            </h3>
         </div>
 
         {/* Description */}
@@ -86,17 +105,17 @@ export function Walkthrough({
             <p>{step.notes}</p>
           </div>
         )}
-      </div>
+      </main>
 
       {/* Navigation */}
-      <div className="walkthrough__navigation">
+      <nav className="walkthrough__navigation" aria-label="Walkthrough step navigation">
         {/* Previous/Next Buttons */}
         <div className="walkthrough__buttons">
           <button
             className="walkthrough__button walkthrough__button--prev"
             onClick={previousStep}
             disabled={!canGoPrevious}
-            aria-label="Previous step"
+            aria-label={canGoPrevious ? `Previous step: ${steps[currentStep - 1].title}` : "No previous step"}
           >
             ← Previous
           </button>
@@ -104,7 +123,7 @@ export function Walkthrough({
             className="walkthrough__button walkthrough__button--next"
             onClick={nextStep}
             disabled={!canGoNext}
-            aria-label="Next step"
+            aria-label={canGoNext ? `Next step: ${steps[currentStep + 1].title}` : "No next step"}          
           >
             Next →
           </button>
@@ -119,12 +138,12 @@ export function Walkthrough({
                 index === currentStep ? 'walkthrough__dot--active' : ''
               }`}
               onClick={() => goToStep(index)}
-              aria-label={`Go to step ${index + 1}`}
+              aria-label={`Go to step ${index + 1}: ${steps[index].title}`}
               aria-current={index === currentStep ? 'step' : undefined}
             />
           ))}
         </div>
-      </div>
+      </nav>
     </div>
   );
 }
@@ -157,17 +176,22 @@ function CodeBlockRenderer({ code }: { code: CodeBlock }) {
       {/* Language label and copy button */}
       <div className="walkthrough__code-header">
         <span className="walkthrough__code-language">{code.language}</span>
-        <button
-          className="walkthrough__copy-button"
-          onClick={handleCopy}
-          aria-label="Copy code"
-        >
-          {copied ? '✓' : 'Copy'}
-        </button>
+          <button
+            className="walkthrough__copy-button"
+            onClick={handleCopy}
+            aria-label={copied ? "Code copied to clipboard" : `Copy ${code.language} code to clipboard`}
+            aria-live="polite"
+          >
+            {copied ? '✓' : 'Copy'}
+          </button>
       </div>
-
       {/* Code content */}
-      <pre className="walkthrough__code">
+      <pre 
+        className="walkthrough__code"
+        role="region"
+        aria-label={`Code example in ${code.language}`}
+        tabIndex={0}
+      >
         <code>
           {lines.map((line, lineIndex) => {
             const lineNumber = lineIndex + 1;

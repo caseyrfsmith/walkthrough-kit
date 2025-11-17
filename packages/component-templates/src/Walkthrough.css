@@ -299,6 +299,7 @@
   .walkthrough {
     --walkthrough-padding: 1rem;
   }
+}
   
   .walkthrough__buttons {
     flex-direction: column;
@@ -307,4 +308,16 @@
   .walkthrough__code {
     font-size: 0.75rem;
   }
-}
+
+  /* Screen reader only - hides visually but keeps for assistive tech */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
