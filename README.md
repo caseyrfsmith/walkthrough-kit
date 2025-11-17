@@ -161,16 +161,16 @@ This creates a client instance for all API calls.
 - Works in restricted environments (Mintlify, Fern)
 - Users own the generated code
 - Extensible (custom languages, themes)
-- Beautiful CLI experience
+- Nice CLI experience
 - AI-powered extraction from freeform text
 
-## TODOs
+## TODO
 
 - Add examples/tutorials for using the component with different generators
 
 ## Why I built this
 
-I'ved wanted to use [CodeHike](https://codehike.org/) for a long time on documentation projects at work. I've always been stuck with tooling that, if it allows custom components, doesn't allow imports. This kinda hampers less technical technical writers, so I wanted to make something that more people could use. Also [a friend](https://github.com/elias-michaias) showed me just how cool you can make zero-dependency components for sites, so I definitely owe him for even knowing this was possible.
+I've wanted to use [CodeHike](https://codehike.org/) for a long time on documentation projects at work. I've always been stuck with tooling that, if it allows custom components, doesn't allow imports. This kinda hampers less technical technical writers, so I wanted to make something that more people could use. Also [a friend](https://github.com/elias-michaias) showed me just how cool you can make zero-dependency components for sites, so I definitely owe him for even knowing this was possible.
 
 ## License
 
