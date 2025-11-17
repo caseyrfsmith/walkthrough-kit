@@ -1,0 +1,18 @@
+Getting Started with Our API
+
+First, you need to install our SDK. Open your terminal and run:
+npm install @company/sdk
+
+Once installed, import the client into your JavaScript file:
+import { Client } from '@company/sdk'
+
+Next, create a client instance with your API key. You can get your API key from the dashboard:
+const client = new Client({
+  apiKey: process.env.API_KEY
+})
+
+Now you're ready to make your first request. Let's fetch a list of users:
+const response = await client.users.list({ limit: 10 })
+console.log(response.data)
+
+That's it! You've made your first API call.

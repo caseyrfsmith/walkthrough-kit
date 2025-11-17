@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "metadata": {
+    "title": "Getting Started with Company SDK API",
+    "estimatedTime": "5 minutes",
+    "difficulty": "beginner",
+    "mode": "separate"
+  },
+  "steps": [
+    {
+      "id": "step-1",
+      "number": 1,
+      "title": "Install the SDK",
+      "description": "Install the company SDK using npm package manager.",
+      "code": {
+        "language": "bash",
+        "content": "npm install @company/sdk",
+        "highlightLines": []
+      },
+      "highlightLines": []
+    },
+    {
+      "id": "step-2",
+      "number": 2,
+      "title": "Import the Client",
+      "description": "Import the Client class from the installed SDK into your JavaScript file.",
+      "code": {
+        "language": "javascript",
+        "content": "import { Client } from '@company/sdk'",
+        "highlightLines": []
+      },
+      "highlightLines": []
+    },
+    {
+      "id": "step-3",
+      "number": 3,
+      "title": "Create Client Instance",
+      "description": "Initialize a new client instance with your API key from environment variables.",
+      "code": {
+        "language": "javascript",
+        "content": "const client = new Client({\n  apiKey: process.env.API_KEY\n})",
+        "highlightLines": []
+      },
+      "notes": "You can get your API key from the dashboard",
+      "highlightLines": []
+    },
+    {
+      "id": "step-4",
+      "number": 4,
+      "title": "Make Your First API Request",
+      "description": "Use the client to fetch a list of users and log the response data.",
+      "code": {
+        "language": "javascript",
+        "content": "const response = await client.users.list({ limit: 10 })\nconsole.log(response.data)",
+        "highlightLines": []
+      },
+      "notes": "This completes your first API call using the SDK",
+      "highlightLines": []
+    }
+  ]
+}

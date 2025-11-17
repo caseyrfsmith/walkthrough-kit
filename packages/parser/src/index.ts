@@ -7,3 +7,6 @@ export type {
   ParserOptions,
   ParseResult
 } from './types.js';
+
+export { parseWithLLM } from './llm-parser.js';
+export type { LLMParserOptions } from './llm-parser.js';
