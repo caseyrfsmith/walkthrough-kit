@@ -32,8 +32,12 @@ jobs:
         with:
           version: 8
 
-      - name: Install dependencies
+      - name: Install root dependencies
         run: pnpm install
+
+      - name: Install docs dependencies
+        run: pnpm install
+        working-directory: ./docs
 
       - name: Build documentation site
         run: pnpm run build
