@@ -37,7 +37,7 @@ export const LANGUAGES: Record<string, LanguagePatterns> = {
     strings: /('([^']*)'|"([^"]*)")/g,
     comments: /#.*/g,
     commands: /\b(echo|cd|ls|grep|awk|sed|cat|chmod|mkdir|rm|cp|mv|touch|pwd|find|sort|uniq|head|tail|wc|diff)\b/g,
-    flags: /--?[a-zA-Z][\w-]*/g,
+    flags: /(?<=\s|^)(-[a-zA-Z]|--[\w-]+)(?=\s|=|$)/g,
   },
 
   html: {
