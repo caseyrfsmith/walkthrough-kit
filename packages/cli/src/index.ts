@@ -25,6 +25,7 @@ program
   .description('Generate walkthrough JSON from markdown')
   .option('--ai', 'Use AI to extract structure from freeform text')
   .option('--api-key <key>', 'Anthropic API key (or set ANTHROPIC_API_KEY env var)')
+  .option('-o, --output <path>', 'Output file path (default: input filename with .json extension)')
   .action(createCommand);
 
 program

@@ -112,7 +112,11 @@ This creates a client instance for all API calls.
 Generate the JSON:
 
 ```bash
+# Default: creates guide.json in the same directory
 walkthrough create guide.md
+
+# Or specify custom output path
+walkthrough create guide.md -o dist/guide.json
 ```
 
 Use in React:

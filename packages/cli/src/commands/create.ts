@@ -7,7 +7,7 @@ import { parseMarkdown, parseWithLLM } from '@walkthrough-kit/parser';
 /**
  * Create a walkthrough JSON file from markdown or freeform text
  */
-export async function createCommand(inputPath: string, options: { ai?: boolean; apiKey?: string }) {
+export async function createCommand(inputPath: string, options: { ai?: boolean; apiKey?: string; output?: string }) {
   const spinner = ora();
 
   try {
@@ -49,7 +49,7 @@ export async function createCommand(inputPath: string, options: { ai?: boolean; 
     }
 
     // Step 4: Determine output path
-    const outputPath = getOutputPath(inputPath);
+    const outputPath = options.output ? resolve(options.output) : getOutputPath(inputPath);
 
     // Step 5: Write JSON file
     spinner.start(`Writing ${chalk.cyan(basename(outputPath))}...`);

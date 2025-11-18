@@ -94,6 +94,9 @@ walkthrough init
 # Create walkthrough from markdown
 walkthrough create guide.md
 
+# Create walkthrough with custom output path
+walkthrough create guide.md -o dist/my-walkthrough.json
+
 # Create walkthrough from freeform text with AI
 walkthrough create notes.txt --ai
 walkthrough create notes.txt --ai --api-key YOUR_KEY
@@ -171,7 +174,6 @@ This creates a client instance for all API calls.
   - Fern
   - Mintlify
   - Generic React apps
-- Add actual walkthroughs to the docs for this project
 - CLI validate command (Optional)
     - Validate JSON structure
     - Check for errors/warnings

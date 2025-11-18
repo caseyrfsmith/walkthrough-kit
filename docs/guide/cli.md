@@ -17,6 +17,7 @@ walkthrough create <input> [options]
 
 ### Options
 
+- `-o, --output <path>` - specify custom output file path (default: input filename with .json extension)
 - `--ai` - use AI to extract structure from freeform text (requires Anthropic API key)
 - `--api-key <key>` - provide Anthropic API key (alternative to ANTHROPIC_API_KEY env var)
 
@@ -27,10 +28,18 @@ walkthrough create <input> [options]
 ```bash
 # Parse markdown file
 walkthrough create guide.md
-
 # Creates guide.json in the same directory
+
+# Parse with relative path
 walkthrough create examples/api-guide.md
 # Output: examples/api-guide.json
+
+# Specify custom output path
+walkthrough create guide.md -o dist/my-walkthrough.json
+# Output: dist/my-walkthrough.json
+
+# Custom output with absolute path
+walkthrough create guide.md --output /path/to/output.json
 ```
 
 #### AI mode
@@ -47,6 +56,9 @@ walkthrough create notes.txt --ai --api-key your-key-here
 
 # Works with markdown files too
 walkthrough create unstructured-doc.md --ai
+
+# Combine AI mode with custom output
+walkthrough create notes.txt --ai -o output/structured-guide.json
 ```
 
 The AI mode will:
