@@ -7,10 +7,9 @@ You write markdown (or freeform text), and the CLI generates:
 1. A complete React component library (that you own and customize)
 2. JSON data files for each walkthrough
 
-All you have to do is add the component to your site
+All you have to do is add the component to your site.
 
-::: note
-This is a starter kit, not a maintained product. Once generated, the code is yours to modify, extend, and maintain however you want.
+:::tip This is a starter kit, not a maintained product. After you generate the code, it's yours to modify, extend, and maintain however you want.
 :::
 
 ## Features

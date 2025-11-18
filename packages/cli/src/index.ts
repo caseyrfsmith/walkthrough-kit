@@ -28,13 +28,4 @@ program
   .option('-o, --output <path>', 'Output file path (default: input filename with .json extension)')
   .action(createCommand);
 
-program
-  .command('validate <file>')
-  .description('Validate walkthrough JSON structure')
-  .action(async (file: string) => {
-    console.log(chalk.blue(`✅ Validating ${file}...\n`));
-    // TODO: Implement validate command
-    console.log(chalk.yellow('Coming soon!'));
-  });
-
 program.parse();

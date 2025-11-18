@@ -73,6 +73,7 @@ walkthrough-kit/
 - Inline code in descriptions (backticks)
 - Highlight line syntax (`javascript:1-3,5`)
 - YAML frontmatter (title, time, difficulty)
+- Built-in validation with helpful warnings
 
 ### React component
 - Syntax highlighting for 7 languages (JS, TS, Python, Bash, HTML, CSS, JSON)
@@ -100,9 +101,6 @@ walkthrough create guide.md -o dist/my-walkthrough.json
 # Create walkthrough from freeform text with AI
 walkthrough create notes.txt --ai
 walkthrough create notes.txt --ai --api-key YOUR_KEY
-
-# Validate JSON structure (coming soon)
-walkthrough validate guide.json
 ```
 
 ## Development
@@ -174,9 +172,6 @@ This creates a client instance for all API calls.
   - Fern
   - Mintlify
   - Generic React apps
-- CLI validate command (Optional)
-    - Validate JSON structure
-    - Check for errors/warnings
 
 ## Why I built this
 

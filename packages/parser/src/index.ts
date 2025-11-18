@@ -10,3 +10,6 @@ export type {
 
 export { parseWithLLM } from './llm-parser.js';
 export type { LLMParserOptions } from './llm-parser.js';
+
+export { validateWalkthrough } from './validator.js';
+export type { ValidationResult, ValidationWarning } from './validator.js';

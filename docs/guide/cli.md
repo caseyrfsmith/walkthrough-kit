@@ -1,7 +1,6 @@
 # CLI commands
 
-#TODO: Intro text, add features once fully implemented
-
+The walkthrough CLI provides commands to generate interactive code walkthroughs from markdown files. It includes built-in validation, AI-powered parsing, and flexible output options to fit your workflow.
 
 ## walkthrough create
 
@@ -61,18 +60,38 @@ walkthrough create unstructured-doc.md --ai
 walkthrough create notes.txt --ai -o output/structured-guide.json
 ```
 
-The AI mode will:
-- Analyze the content and identify logical steps
-- Extract code blocks with correct language detection
-- Generate titles and descriptions for each step
-- Determine if the walkthrough should use separate or unified mode
-- Create properly structured JSON output
+The AI mode:
+- Analyzes the content and identify logical steps
+- Extracts code blocks with correct language detection
+- Generates titles and descriptions for each step
+- Determines if the walkthrough should use separate or unified mode
+- Creates properly structured JSON output
 
 AI mode is perfect for converting existing documentation, README files, or freeform notes into interactive walkthroughs without manually formatting them.
 
 ::: warning Review AI output
 AI-generated content should be reviewed for accuracy. The CLI will display a warning after generation.
 :::
+
+### Automatic validation
+
+The `create` command automatically validates the generated JSON and displays helpful warnings:
+
+- **Structure issues** (yellow): Problems that may cause rendering errors (duplicate IDs, highlight lines out of range)
+- **Compatibility warnings** (yellow): Unsupported languages that won't have syntax highlighting
+- **Quality suggestions** (gray): Optional improvements (missing metadata, long titles, steps without code)
+
+Example output:
+```
+⚠️  Compatibility warnings:
+  • Language "ruby" is not supported for syntax highlighting (Step 1)
+
+ℹ️  Quality suggestions:
+  • Missing estimated time in metadata
+  • Title is very long (114 characters, recommend < 80) (Step 2)
+```
+
+The JSON file is still created even with warnings, but they help you catch potential issues early.
 
 
 ## walkthrough init
@@ -155,18 +174,6 @@ your-project/
 ::: tip You own the code!
 The component files are copied into your project, not installed as a dependency. You can customize them however you want - modify styles, add features, or adjust the lexer.
 :::
-
-## walkthrough validate
-
-::: warning Coming soon
-This command is not yet implemented.
-:::
-
-Validate JSON structure against the schema.
-
-```bash
-walkthrough validate <file>
-```
 
 ## Direct usage (development)
 
